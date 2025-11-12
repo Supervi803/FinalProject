@@ -5,7 +5,7 @@
 <https://github.com/Supervi803/FinalProject.git>
 
 ## Description
-The program will take in user's video and show the fps, duration, and resultion of it and have the option to change those properties. My program is relevant because it is used by people for media and digital art purposes.  
+The program will take in user's video and show the fps, duration, and resolution of it and have the option to change those properties. My program is relevant because it is used by people for media and digital art purposes.  
 
 ## Features
 - Showing Video Information

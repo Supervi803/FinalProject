@@ -23,11 +23,13 @@ class VideoInfo:
             "width": self.width,
             "height": self.height
         }
+# test
 
 class Video_Processor:
 #creates changes to fps, duration, and size. MOdifications ftw
-    def __init__(self):
-        pass
+    def __init__(self, file_path):
+        self.file_path = file_path
+        
     def apply_changes(self, new_fps = None, 
                       new_duration = None, new_width = None,
                       new_height = None, save_path = "output.mp4"):
@@ -61,7 +63,7 @@ if __name__ == "__main__":
 
         #testing class Vid Processor
         processor = Video_Processor(test_path)
-        processor.apply_changes(new_fps = 24, save_path = "week1_test_output.mp4")
+        processor.apply_changes(new_fps = 24, save_path = "Week123_test_output.mp4")
 
     except Exception as errorMessage:
         print("Error: ", errorMessage)

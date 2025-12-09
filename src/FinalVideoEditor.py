@@ -48,21 +48,18 @@ class Video_Processor:
             #save the vid
             clip.write_videofile(save_path)
 
-            return save_path
-
 #testing 123 
 if __name__ == "__main__": 
     print("test running rn")
-    test_path = "Testing123.mp4"
-    
     try: 
         #testing data reader
-        info = VideoInfo(test_path)
-        data = info.read_metadata()
+        video_path = input("Enter the path of vid file: ")
+        info = VideoInfo(video_path)
+        data = info.read_data()
         print("Video Info: ", data)
 
         #testing class Vid Processor
-        processor = Video_Processor(test_path)
+        processor = Video_Processor(video_path)
         processor.apply_changes(new_fps = 24, save_path = "Week123_test_output.mp4")
 
     except Exception as errorMessage:

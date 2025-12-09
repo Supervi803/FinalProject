@@ -2,7 +2,8 @@
 import tkinter as tk
 from tkinter import filedialog, messagebox
 from moviepy.editor import VideoFileClip 
-import moviepy
+import tkinter.font as font
+import os
 
 #stores video path and initializes attributes as "None"
 #__init__ is called when creating a new VideoInfo object
@@ -61,34 +62,56 @@ class VideoEditorGUI:
     def __init__(self, master):
         self.master = master
         #window title
-        master.title("video editor")
+        master.title("Video Editor")
+        #ktinter for windows size
+        master.state('zoomed')
         #store selected video path and stores VideoInfo object
         self.video_path = None
         self.video_info = None
+        
+        #fonts
+        self.button_font = font.Font(family = "Montserrat", size = 16, weight = "bold")
+        self.entry_font = font.Font(size = 14)
+
+        #background
+        master.configure(bg = "#01084f")
 
         #the buttons that is for inputs
 
         #open file dialog
-        self.select_button = tk.Button(master, text="Select Video", command=self.select_video)
-        self.select_button.grid(row=0, column=0, padx=5, pady=5)
+        self.select_button = tk.Button(master, text="Select Video", command=self.select_video,
+                                       width = 20, height = 2, font = self.button_font, bg = "#631e50", 
+                                       fg = "white")
+        self.select_button.grid(row=0, column=0, padx=20, pady=20)
         #padx and pady adds space around button
 
         #read data from selected videos and fill the entry fields
-        self.load_button = tk.Button(master, text="Load Info", command=self.load_video_info)
-        self.load_button.grid(row=0, column=1, padx=5, pady=5)
+        self.load_button = tk.Button(master, text="Load Info", command=self.load_video_info, 
+                                       width = 20, height = 2, font = self.button_font, bg = "#631e50", 
+                                       fg = "white")
+        self.load_button.grid(row=0, column=1, padx=20, pady=20)
 
         #use Video_Processor to apply changes and save into new video file
 
-        self.save_button = tk.Button(master, text="Apply Changes", command=self.apply_changes)
+        self.save_button = tk.Button(master, text="Apply Changes", command=self.apply_changes, 
+                                       width = 20, height = 2, font = self.button_font, bg = "#631e50", 
+                                       fg = "white")
         
         #arrange the buttons in a row w/ spacing
-        self.save_button.grid(row=0, column=2, padx=5, pady=5)
+        self.save_button.grid(row=0, column=2, padx=20, pady=20)
 
         #lables for info display
-        tk.Label(master, text="FPS:").grid(row=1, column=0)
-        tk.Label(master, text="Duration (sec):").grid(row=2, column=0)
-        tk.Label(master, text="Width:").grid(row=3, column=0)
-        tk.Label(master, text="Height:").grid(row=4, column=0)
+        labels = ["FPS:", "Duration (secs):", "Width (px):", "Height (px):"]
+        self.entries = []
+
+        for i, text in enumerate(labels):
+            lbl = tk.Label(master, text=text, font=self.button_font, bg="#01084f", fg="white")
+            lbl.grid(row=i+1, column=0, padx=20, pady=(25,10), sticky="e")
+
+            entry = tk.Entry(master, font=self.entry_font)
+            self.entries.append(entry)
+
+        self.fps_entry, self.duration_entry, self.width_entry, self.height_entry = self.entries
 
         #allow user input to change properties
         self.fps_entry = tk.Entry(master)
